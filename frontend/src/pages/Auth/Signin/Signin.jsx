@@ -7,14 +7,17 @@ import Button from '../../../components/Button/Button';
 import styles from '../Auth.module.css';
 
 const Signin = () => {
-    const { email, setEmail, password, setPassword, handleSubmit } = useAuth(
-        UserApi.signin,
+    const { email, setEmail, password, setPassword, handleSignIn } = useAuth(
+        UserApi.signin, // signInMethod
+        null,
         '로그인에 성공하였습니다.',
-        '/connectify'
+        null,
+        '/connectify',
+        null
     );
 
     return (
-        <form onSubmit={handleSubmit} className={styles.formContainer}>
+        <form onSubmit={handleSignIn} className={styles.formContainer}>
             <h1>로그인</h1>
             <FormInput label="이메일" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
             <FormInput
