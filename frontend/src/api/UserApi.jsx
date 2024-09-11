@@ -36,7 +36,21 @@ const logout = () => {
 
 const UserApi = {
     signup: (email, username, password) => axiosInstance.post('/signup', { email, username, password }),
-    signin: (email, password) => axiosInstance.post('/signin', { email, password }),
+    signin: async (email, password) => {
+        try {
+            const response = await axiosInstance.post('/signin', { email, password });
+            const { accessToken } = response.data;
+
+            if (accessToken) {
+                localStorage.setItem('accessToken', accessToken);
+            }
+
+            return response;
+        } catch (error) {
+            console.error('Login failed:', error);
+            throw error;
+        }
+    },
     logout: () => axiosInstance.post('/logout'),
 };
 

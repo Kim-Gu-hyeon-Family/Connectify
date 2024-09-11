@@ -8,7 +8,7 @@ import styles from '../Auth.module.css';
 
 const Signin = () => {
     const { email, setEmail, password, setPassword, handleSignIn } = useAuth(
-        UserApi.signin, // signInMethod
+        UserApi.signin,
         null,
         '로그인에 성공하였습니다.',
         null,
