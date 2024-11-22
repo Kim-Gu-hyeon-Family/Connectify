@@ -1,3 +1,6 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -7,9 +10,45 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model users {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
-  username String @unique
-  password String
+model User {
+  id         Int               @id @default(autoincrement())
+  username            String            @unique
+  password      String
+  posts     Post[] 
+  messages   ChatMessage[]
+  chatRooms  ChatRoom[]
+}
+
+model Post {
+  id        Int       @id @default(autoincrement())
+  title     String
+  content   String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  userId    Int      
+  user      User      @relation(fields: [userId], references: [id])
+  messages   ChatMessage[]
+  chatRooms  ChatRoom[]
+}
+
+model ChatRoom {
+  id        Int       @id @default(autoincrement())
+  postId    Int
+  userId    Int
+  createdAt DateTime  @default(now())
+
+  post      Post      @relation(fields: [postId], references: [id])
+  user      User      @relation(fields: [userId], references: [id])
+
+  @@unique([postId, userId])
+}
+
+model ChatMessage {
+  id         Int       @id @default(autoincrement())
+  content    String
+  createdAt  DateTime  @default(now())
+  postId     Int
+  userId     Int
+  post       Post      @relation(fields: [postId], references: [id])
+  user       User      @relation(fields: [userId], references: [id])
 }
