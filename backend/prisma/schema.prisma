@@ -4,12 +4,43 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = env("DATABASE_URL")
+  url      = env("DATABASE_URL") 
 }
 
-model users {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
-  username String @unique
-  password String
+model User {
+  id         Int               @id @default(autoincrement())
+  username   String            @unique
+  password   String
+  role       String            @default("user")
+  posts      Post[]
+  chatRooms  ChatRoom[]        @relation("ChatRoomUsers") // ChatRoom과의 관계 필드 추가
+  messages   Message[]         // Message와의 관계 필드 추가
+}
+
+model Post {
+  id        Int       @id @default(autoincrement())
+  title     String
+  content   String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  userId    Int
+  user      User      @relation(fields: [userId], references: [id])
+}
+
+model ChatRoom {
+  id        Int       @id @default(autoincrement())
+  name      String
+  createdAt DateTime  @default(now())
+  users     User[]    @relation("ChatRoomUsers") // 반대 관계 명시
+  messages  Message[]
+}
+
+model Message {
+  id        Int       @id @default(autoincrement())
+  content   String
+  createdAt DateTime  @default(now())
+  senderId  Int
+  roomId    Int
+  sender    User      @relation(fields: [senderId], references: [id]) // 반대 관계 명시
+  room      ChatRoom  @relation(fields: [roomId], references: [id])
 }
