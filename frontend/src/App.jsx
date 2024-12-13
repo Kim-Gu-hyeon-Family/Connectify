@@ -6,11 +6,11 @@ import {
     Navigate,
 } from "react-router-dom";
 
-import Signup from "./pages/Auth/Signup/Signup";
-import Signin from "./pages/Auth/Signin/Signin";
-import Main from "./pages/Auth/main/Main"; // 경로 확인
-import Notfounds from "./pages/Auth/Notfounds/Notfounds";
-import CreatePost from "./pages/Auth/create-post/create-post";
+import Signup from "./pages/Signup";
+import Signin from "./pages/Signin";
+import Main from "./pages/Main"; // 경로 확인
+import Notfounds from "./pages/Notfounds";
+import CreatePost from "./pages/create-post";
 
 const App = () => (
     <Router>
