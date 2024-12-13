@@ -18,7 +18,7 @@ const Signup = () => {
 
     return (
         <form onSubmit={handleSignUp} className={styles.formContainer}>
-            <h1>회원가입</h1>
+            <h1 className='h1'>회원가입</h1>
             <FormInput
                 label="이메일"
                 type="email"

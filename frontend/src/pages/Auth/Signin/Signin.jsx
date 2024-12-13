@@ -18,7 +18,7 @@ const Signin = () => {
 
     return (
         <form onSubmit={handleSignIn} className={styles.formContainer}>
-            <h1>로그인</h1>
+            <h1 className='h1'>로그인</h1>
             <FormInput label="이메일" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
             <FormInput
                 label="비밀번호"
