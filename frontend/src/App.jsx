@@ -11,6 +11,7 @@ import Signin from "./pages/Signin";
 import Main from "./pages/Main"; // 경로 확인
 import Notfounds from "./pages/Notfounds";
 import CreatePost from "./pages/create-post";
+import Profile from "./pages/Profile";
 
 const App = () => (
     <Router>
@@ -19,8 +20,9 @@ const App = () => (
             <Route path="/signup" element={<Signup />} />
             <Route path="/signin" element={<Signin />} />
             <Route path="/main" element={<Main />} />
-            <Route path="*" element={<Notfounds />} /> {/* path="" 수정 */}
+            <Route path="*" element={<Notfounds />} />
             <Route path="/CreatePost" element={<CreatePost />} />
+            <Route path="/Profile" element={<Profile />} />
 
         </Routes>
     </Router>

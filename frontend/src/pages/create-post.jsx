@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import './CreatePost.css';
+import { useNavigate } from 'react-router-dom'; // React Router 사용 시
+
 const CreatePost = () => {
     const [text, setText] = useState('');
     const [image, setImage] = useState(null);
+    const navigate = useNavigate(); // 페이지 이동을 위한 함수
 
     const handleTextChange = (e) => {
         setText(e.target.value);
@@ -19,9 +22,13 @@ const CreatePost = () => {
         console.log('Image:', image);
     };
 
+    const handleGoBack = () => {
+        navigate('/'); // 메인 페이지 경로로 이동
+    };
+
     return (
-        <div>
-            <h1>Create Post</h1>
+        <div className='create'>
+            <h1 className='h1'>채팅 만들기</h1>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="text">Text:</label>
@@ -32,18 +39,11 @@ const CreatePost = () => {
                         required
                     />
                 </div>
-                <div>
-                    <label htmlFor="image">Image:</label>
-                    <input
-                        type="file"
-                        id="image"
-                        accept="image/*"
-                        onChange={handleImageChange}
-                        required
-                    />
-                </div>
                 <button type="submit">Post</button>
             </form>
+            <button className="back-button" onClick={handleGoBack}>
+                Go Back to Main
+            </button>
         </div>
     );
 };
