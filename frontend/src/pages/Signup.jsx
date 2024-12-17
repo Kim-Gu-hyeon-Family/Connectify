@@ -4,7 +4,7 @@ import FormInput from '../components/FormInput';
 import UserApi from '../api/UserApi';
 import useAuth from '../hooks/useAuth';
 import Button from '../components/Button';
-import styles from '../Auth.module.css';
+import styles from './Auth.module.css';
 
 const Signup = () => {
     const { email, setEmail, username, setUsername, password, setPassword, handleSignUp } = useAuth(
